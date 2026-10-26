@@ -284,7 +284,7 @@ section {
 /* ─── REVEAL ANIMATION ───────────────────────────────── */
 .reveal {
   opacity: 0; transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out !important;
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-left {
@@ -381,9 +381,7 @@ section {
   border-radius: var(--radius);
   padding: 32px;
   position: relative; overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
-              box-shadow 0.35s ease, 
-              border-color 0.35s ease !important;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
   cursor: none;
 }
 .bento-card::before {
@@ -394,10 +392,409 @@ section {
 .bento-card:hover::before { opacity: 1; }
 .bento-card:hover {
   border-color: var(--border-bright);
-  transform: translateY(-8px) scale(1.015);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 .bento-card.span-4 { grid-column: span 4; }
 .bento-card.span-2 { grid-column: span 2; }
 .bento-card.span-3 { grid-column: span 3; }
-.b
+.bento-card.span-6 { grid-column: span 6; }
+.bento-card.featured {
+  border-color: rgba(0,255,136,0.2);
+  background: linear-gradient(135deg, rgba(0,255,136,0.03), var(--surface));
+}
+.card-num {
+  font-family: var(--font-mono); font-size: 5rem; font-weight: 900;
+  color: rgba(255,255,255,0.04); position: absolute;
+  top: 12px; right: 24px; line-height: 1; user-select: none;
+}
+.card-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  padding: 5px 12px; border-radius: 100px;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.badge-green { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); color: var(--green); }
+.badge-purple { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); color: var(--neon-purple); }
+.badge-cyan { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); color: var(--accent2); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse2 2s infinite; }
+.card-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+.card-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.card-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.card-links { display: flex; gap: 12px; }
+.card-link {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--muted); letter-spacing: 1px;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s;
+}
+.card-link:hover { color: var(--green); }
+.card-icon-big {
+  font-size: 3rem; margin-bottom: 12px; display: block;
+}
+.award-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(251,191,36,0.05));
+  border: 1px solid rgba(251,191,36,0.3);
+  color: #fbbf24; border-radius: 100px;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  padding: 5px 12px; margin-top: 12px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ─── ACHIEVEMENTS ───────────────────────────────────── */
+#achievements { background: var(--bg2); }
+.ach-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 1px; height: calc(100% - 16px);
+  background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+}
+.tl-item {
+  position: relative; margin-bottom: 48px;
+}
+.tl-item::before {
+  content: ''; position: absolute; left: -36px; top: 8px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 12px var(--accent);
+  border: 2px solid var(--bg2);
+}
+.tl-item.green::before { background: var(--green); box-shadow: 0 0 12px var(--green); }
+.tl-item.cyan::before { background: var(--accent2); box-shadow: 0 0 12px var(--accent2); }
+.tl-year {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--muted); letter-spacing: 2px; margin-bottom: 6px;
+}
+.tl-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+.tl-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+.cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cert-card:hover {
+  border-color: var(--border-bright);
+  transform: translateX(4px);
+}
+.cert-issuer {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--accent2); letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.cert-name { font-size: 0.85rem; font-weight: 500; line-height: 1.4; }
+
+/* ─── CONTACT ────────────────────────────────────────── */
+#contact { background: var(--bg); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+.contact-info-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+.contact-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px; }
+.social-links { display: flex; flex-direction: column; gap: 16px; }
+.social-link {
+  display: flex; align-items: center; gap: 16px;
+  color: var(--muted); font-size: 0.9rem;
+  transition: color 0.2s, transform 0.2s;
+  font-family: var(--font-mono);
+}
+.social-link:hover { color: var(--green); transform: translateX(8px); }
+.social-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.social-link:hover .social-icon { border-color: var(--green); background: rgba(0,255,136,0.06); }
+/* Contact Form */
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-group { position: relative; }
+.form-group input,
+.form-group textarea {
+  width: 100%; padding: 16px 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-family: var(--font-sans); font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none; resize: none;
+}
+.form-group textarea { height: 140px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+.form-submit {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; border: none; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 0.85rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  align-self: flex-start; cursor: none;
+}
+.form-submit:hover { transform: translateY(-3px); box-shadow: var(--glow); }
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 40px 8%;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-copy {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--muted); letter-spacing: 1px;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--muted); letter-spacing: 1px;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--green); }
+.footer-accent {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  color: var(--muted);
+}
+.footer-accent span { color: var(--green); }
+
+/* ─── NOISE OVERLAY ─────────────────────────────────── */
+.noise {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ─── KEYFRAMES ─────────────────────────────────────── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:0.7; } }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+@keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
+@keyframes pulse2 { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+@keyframes spin-slow { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+/* ─── GLOW ORBS ─────────────────────────────────────── */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none; z-index: 0;
+}
+.orb1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%);
+  top: -200px; right: -100px;
+  animation: float 8s ease infinite;
+}
+.orb2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%);
+  bottom: 0; left: -100px;
+  animation: float 10s ease infinite reverse;
+}
+
+/* ─── MARQUEE ─────────────────────────────────────────── */
+.marquee-section {
+  position: relative; z-index: 1;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+  background: var(--surface);
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+  padding: 0 40px;
+}
+.marquee-item .sep { color: var(--accent); font-size: 1.2rem; }
+@keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ─── MOBILE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-grid, .ach-layout, .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+  .bento-card.span-4, .bento-card.span-2, .bento-card.span-3 { grid-column: span 6; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  section { padding: 80px 6%; }
+  .bento-grid { grid-template-columns: 1fr; gap: 12px; }
+  .bento-card.span-4,.bento-card.span-2,.bento-card.span-3,.bento-card.span-6 { grid-column: span 1; }
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring { display: none; }
+}
+@media (max-width: 500px) {
+  .hero-stats { gap: 20px; }
+  .hero-cta { flex-direction: column; }
+  .btn-primary, .btn-outline { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Noise texture -->
+<div class="noise"></div>
+
+<!-- Animated Background Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ─── NAVBAR ────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-logo">nk<span>.dev</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#achievements">achievements</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#skills" class="mobile-link">Skills</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#achievements" class="mobile-link">Achievements</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="hero-tag">Available for opportunities</div>
+
+  <h1 class="hero-name">
+    NISHA<br>
+    <span class="line2">KUMARI</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    <span id="typed-text"></span><span class="type-cursor"></span>
+  </p>
+
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View My Work →</a>
+    <a href="#contact" class="btn-outline">Get In Touch</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num" data-count="9.32" data-dec="2">0</span>
+      <span class="stat-label">CGPA</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-count="3" data-dec="0">0</span>
+      <span class="stat-label">Projects Built</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">Top 90</span>
+      <span class="stat-label">SIH 2026</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-count="9" data-dec="0">0</span>
+      <span class="stat-label">Certifications</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ───────────────────────────────────────── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item">Computer Vision <span class="sep">✦</span></div>
+    <div class="marquee-item">Machine Learning <span class="sep">✦</span></div>
+    <div class="marquee-item">IoT Innovation <span class="sep">✦</span></div>
+    <div class="marquee-item">AI Engineering <span class="sep">✦</span></div>
+    <div class="marquee-item">MLOps <span class="sep">✦</span></div>
+    <div class="marquee-item">Responsible AI <span class="sep">✦</span></div>
+    <div class="marquee-item">Cybersecurity <span class="sep">✦</span></div>
+    <div class="marquee-item">Python <span class="sep">✦</span></div>
+    <div class="marquee-item">OpenCV <span class="sep">✦</span></div>
+    <div class="marquee-item">Google Cloud <span class="sep">✦</span></div>
+    <!-- duplicate for infinite loop -->
+    <div class="marquee-item">Computer Vision <span class="sep">✦</span></div>
+    <div class="marquee-item">Machine Learning <span class="sep">✦</span></div>
+    <div class="marquee-item">IoT Innovation <span class="sep">✦</span></div>
+    <div class="marquee-item">AI Engineering <span class="sep">✦</span></div>
+    <div class="marquee-item">MLOps <span class="sep">✦</span></div>
+    <div class="marquee-item">Responsible AI <span class="sep">✦</span></div>
+    <div class="marquee-item">Cybersecurity <span class="sep">✦</span></div>
+    <div class="marquee-item">Python <span class="sep">✦</span></div>
+    <div class="marquee-item">OpenCV <span class="sep">✦</span></div>
+    <div class="marquee-item">Google Cloud <span class="sep">✦</span></div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-label reveal">001 — About</div>
+  <h2 class="section-title reveal">Turning <span class="hl">AI</span> into<br>Real-World Impact</h2>
+
+  <div class="about-grid">
+    <div class="reveal-left">
+      <p class="about-bio">
+        I'm a <strong>Computer Science Engineering (AI & ML)</strong> student at Presidency University, Bengaluru, with a <strong>9.32 CGPA</strong>. I build intelligent systems that solve real-world problems — from helping yoga practitioners correct their posture in real time to designing assistive IoT devices for the visually impaired.
+      </p>
+      <p class="about-bio">
+        My passion sits at the intersection of <strong>AI, Computer Vision, and IoT</strong>. I'm driven by the belief that technology should be <strong>accessible, ethical, and impactful</strong> — which is why I've invested deeply in Responsible AI and MLOps practices alongside core engineering skills.
+      </p>
+      <p class="about-bio">
+        When I'm not building projects, I'm competing in hackathons, earning certifications, and contributing as <strong>Monitor of NSS Unit-1</strong>.
+      </p>
+    </div>
+
+    <div class="reveal-right">
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div class="tdot red"></div>
+          <div class="tdot yellow"></div>
+          <div class="tdot green"></div>
+          <span class="terminal-title">nisha@portfolio:~$</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">→</span><span class="t-cmd">cat</span><span class="t-val">profile.json</span></div>
+          <div class="t-line" style="margin-top:10px"><span class="t-key">{</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"name"</span><span class="t-val">:</span><span class="t-string">"Nisha Kumari"</span><span class="t-val">,</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"role"</span><span class="t-val">:</span><span class="t-string">"AI &amp; ML Engineer"</span><span class="t-val">,</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"university"</span><span class="t-val">:</span><span class="t-string">"Presidency Univ."</span><span class="t-val">,</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"cgpa"</span><span class="t-val">:</span><span class="t-cmd">9.32</span><span class="t-val">,</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"year"</span><span class="t-val">:</span><span class="t-string">"2025–2029"</span><span class="t-val">,</span></div>
+          <div class="t-line" style="padding-left:16px"><span class="t-key">"focus"</span><span class="t-val">:</span><span class="t-string">"AI, Computer Vision, IoT"</span></div>
+          <div class="t-line"><span class="t-key">}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
